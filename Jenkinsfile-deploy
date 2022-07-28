@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+    
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'deploy',url: 'https://github.com/UnaxMendi/Final_CS.git'
+            }
+        }        
+        stage('Requirements') {
+            steps {
+                echo 'Installing dependencies...'
+                sh 'pip3 install -r requirements.txt'
+                sh 'python3 project/init/init_db.py'
+            }
+        }
+        stage('Unit/Integration tests') {
+            steps {
+                echo 'Unit/Integration...'
+                sh 'python3 -m unittest discover -s tests/unit -v'
+            }
+        }        
+        stage('Acceptance tests') {
+            steps {
+                echo 'Acceptance...'
+                sh 'python3 -m unittest discover -s tests/acceptance-flask -v'
+            }
+        }     
+        stage('Create image') {
+            steps {
+                echo 'creating image...'
+                //sh 'docker build -t 618383339/final_cs:myinsuranceapp -f Dockerfile .'
+                sh 'docker build -t unaxmendizabal.azurecr.io/myinsuranceappunax:v8 -f Dockerfile .'
+            }
+        } 
+        stage('Publish image') {
+            steps {
+                echo 'pushing image..'
+                //withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) {
+                //    sh 'docker push 618383339/final_cs:myinsuranceapp'
+                //}
+                withDockerRegistry([ credentialsId: "azure-credentials-CS", url: "https://finalcs.azurecr.io" ]) {
+                    sh 'docker push unaxmendizabal.azurecr.io/myinsuranceappunax:v8'
+                }
+            }
+        }
+        stage('Apply Kubernetes ') {
+            steps {
+                withKubeConfig([credentialsId: 'k8-credentials']) {
+                    //sh 'kubectl apply -f kubernetes/myapp_docker_deploy.yaml'
+                    //sh 'kubectl apply -f kubernetes/myapp_docker_service.yaml'
+                    sh 'kubectl apply -f kubernetes/myapp_azure_deploy.yaml'
+                    sh 'kubectl apply -f kubernetes/myapp_azure_service.yaml'
+                    sh 'kubectl port-forward service/myinsuranceapp 5000:5000 &'
+                }
+            }
+        }
+        stage('External acceptance tests') {
+            steps{
+                echo 'External acceptance tests...'
+                sh 'python3 -m unittest discover -s tests/acceptance-request -v'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'post do this always...'
+        }
+        success{
+            echo 'post do this when success...'
+        }
+        failure {
+            echo 'post do this when failure...'
+        }
+        cleanup{
+            echo 'post do this when cleanup...'
+            //sh 'pkill -f "port-forward"'
+            //deleteDir()
+        }
+    }
+}

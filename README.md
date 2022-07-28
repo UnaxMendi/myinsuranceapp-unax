@@ -47,4 +47,5 @@
   - k6 run sample-load-test.js
     - For this is necessary that the service be running
 
+
 "# myinsuranceapp-unax" 

@@ -1,0 +1,6 @@
+resources:
+  - myapp_azure_deploy.yaml
+  - myapp_azure_service.yaml
+  - myapp_docker_deploy.yaml
+  - myapp_docker_service.yaml
+  

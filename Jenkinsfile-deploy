@@ -52,7 +52,7 @@ pipeline {
                     //sh 'kubectl apply -f kubernetes/myapp_docker_service.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_deploy.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_service.yaml'
-                    sh 'kubectl port-forward service/myinsuranceappunax-service 5000:5050 &'
+                    sh 'kubectl port-forward service/myinsuranceappunax-service 5050:5000 &'
                 }
             }
         }
@@ -75,8 +75,8 @@ pipeline {
         }
         cleanup{
             echo 'post do this when cleanup...'
-            //sh 'pkill -f "port-forward"'
-            //deleteDir()
+            sh 'pkill -f "port-forward"'
+            deleteDir()
         }
     }
 }

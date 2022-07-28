@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myinsuranceapp-deployment-az
+  name: myinsuranceappunax-deployment
   labels:
     app: myinsuranceapp-az
 spec:
-  replicas: 5
+  replicas: 8
   selector:
     matchLabels:
       app: myinsuranceapp-az

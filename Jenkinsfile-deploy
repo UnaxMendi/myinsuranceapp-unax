@@ -52,7 +52,7 @@ pipeline {
                     //sh 'kubectl apply -f kubernetes/myapp_docker_service.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_deploy.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_service.yaml'
-                    sh 'kubectl port-forward service/myinsuranceapp 5000:5000 &'
+                    sh 'kubectl port-forward service/myinsuranceapp 5000:5050 &'
                 }
             }
         }

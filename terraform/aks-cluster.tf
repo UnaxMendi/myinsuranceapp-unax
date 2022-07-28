@@ -1,4 +1,4 @@
-resource "random_pet" "prefix" {}
+resource "akshackathonunax" "prefix" {}
 
 provider "azurerm" {
   features {}

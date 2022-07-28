@@ -47,7 +47,7 @@ pipeline {
         }
         stage('Apply Kubernetes ') {
             steps {
-                withKubeConfig([credentialsId: 'k8-credentials']) {
+                withKubeConfig([credentialsId: 'k8-credentials', contextName:'minikube' ]) {
                     //sh 'kubectl apply -f kubernetes/myapp_docker_deploy.yaml'
                     //sh 'kubectl apply -f kubernetes/myapp_docker_service.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_deploy.yaml'

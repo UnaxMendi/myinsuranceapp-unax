@@ -15,7 +15,7 @@ spec:
         app: myinsuranceapp-az
     spec:
       imagePullSecrets:
-      - name: acr-secret 
+      - name: acr-secret-unax2
       containers:
       - name: myinsuranceapp-deployment-az
         image:  unaxmendizabal.azurecr.io/myinsuranceappunax:v8

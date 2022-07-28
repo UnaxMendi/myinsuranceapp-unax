@@ -53,6 +53,7 @@ pipeline {
                     sh 'kubectl apply -f kubernetes/myapp_azure_deploy.yaml'
                     sh 'kubectl apply -f kubernetes/myapp_azure_service.yaml'
                     sh 'kubectl port-forward service/myinsuranceappunax-service 5050:5000 &'
+                    sleep 5 // give 5 secs to stablish the port forward
                 }
             }
         }

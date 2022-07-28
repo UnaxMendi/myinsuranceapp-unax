@@ -36,7 +36,7 @@ pipeline {
         stage('Publish image') {
             steps {
                 echo 'pushing image...'
-                withDockerRegistry([ credentialsId: "azure-credentials-CS", url: "" ]) {
+                withDockerRegistry([ credentialsId: "azure-credentials-CS", url: "https://unaxmendizabal.azurecr.io" ]) {
                     sh 'docker build -t unaxmendizabal.azurecr.io/myinsuranceappunax:v8 -f Dockerfile .'
                 }
             }

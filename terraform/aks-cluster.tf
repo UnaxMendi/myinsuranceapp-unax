@@ -5,7 +5,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "default" {
-  name     = akshackathonUnax-rg
+  name     = "akshackathonUnax-rg"
   location = "East Asia"
 
   tags = {
@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 resource "azurerm_kubernetes_cluster" "default" {
-  name                = akshackathonUnax-rg
+  name                = "akshackathonUnax-rg"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
   dns_prefix          = "${random_pet.prefix.id}-k8s"

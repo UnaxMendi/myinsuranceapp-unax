@@ -5,7 +5,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "default" {
-  name     = "${akshackathonunax.prefix.id}-rg"
+  name     = "${random_pet.prefix.id}-rg"
   location = "East Asia"
 
   tags = {

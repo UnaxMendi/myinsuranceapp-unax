@@ -31,7 +31,7 @@ class TestApp(unittest.TestCase):
 
         headers = {"Autohrization": f"Bearer {TestApp.token}"}
 
-        response = tester.get('/api/v1/users/1/1', content_type='application/json', headers=headers)
+        response = tester.get('/api/v1/users/1/products', content_type='application/json', headers=headers)
 
         data=json.loads(response.text)
         print(f"get_user_products: {data}")

@@ -77,10 +77,9 @@ class TestApp(unittest.TestCase):
         response = tester.get('/api/v1/products/1', content_type='application/json', headers=headers)
         print(response)
         data=json.loads(response.text)
-        print(data)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(len(data)>0)
-"""
+
     def test_6_invalid_product(self):
         tester = app.test_client(self)
 
@@ -91,5 +90,7 @@ class TestApp(unittest.TestCase):
         response = tester.get('/api/v1/products/56', content_type='application/json', headers=headers)
 
         data=json.loads(response.text)
+        print(data)
+        """
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(data), 0)"""

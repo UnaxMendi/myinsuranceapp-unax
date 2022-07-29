@@ -38,4 +38,23 @@ class TestApp(unittest.TestCase):
         data=json.loads(response.text)
         print(f"get_user_products: {data}")
         self.assertTrue(response.status_code > 400)
-        
+
+    def test_4_invalid_user(self):
+        url=f"{self.base_url}/users/56/products"
+        print(f"token: {self.token}")
+        headers = {"Authorization": f"Bearer {TestApp.token}"}
+        response = requests.get(url, headers=headers)
+        data=json.loads(response.text)
+        print(f"get_user_products: {data}")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(data), 0)
+
+    def test_5_products(self):
+        url=f"{self.base_url}/products/1"
+        print(f"token: {self.token}")
+        headers = {"Authorization": f"Bearer {TestApp.token}"}
+        response = requests.get(url, headers=headers)
+        data=json.loads(response.text)
+        print(f"get_user_products: {data}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(len(data)>0)

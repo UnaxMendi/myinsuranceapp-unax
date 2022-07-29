@@ -42,7 +42,6 @@ class TestApp(unittest.TestCase):
     def test_3_get_user_products_invalid_token(self):
         tester = app.test_client(self)
         
-        # this is a fake/invalid token, so it smust not work for accessing restricted area
         ivalid_fake_token='CfDJ8OW5OI0CPGJBgSNlGwO0x4YF7qbYKVv7KOO-N0eFtDUzXOrL7F9Xd9W1otVi4ueJOkAmAhuoHFWNkqRaFD7zvAMHMSKncl6Vo5QXKmpvy6vqxOKxSURdIey8aZPRi3Nnhp2p9la-Al5xrVKz0lignRdcCHf3O7pF9zv_sNx_c_T7pUe3WsxaJEPX3t_9FO2Wjw'
 
         headers = {"Authorization": f"Bearer {ivalid_fake_token}"}
@@ -50,8 +49,6 @@ class TestApp(unittest.TestCase):
         data=json.loads(response.text)
         print(f"get_user_products: {data}")
 
-        # we expect the response code to be some 4XX code, that means that the request is invalid
-        # this is true, since we send a invalida token
         self.assertTrue(response.status_code > 400)
 
 
@@ -62,7 +59,7 @@ class TestApp(unittest.TestCase):
 
         headers = {"Authorization": f"Bearer {TestApp.token}"}
 
-        response = tester.ge('/api/v1/users/8/products', content_type='application/json', headers=headers)
+        response = tester.get('/api/v1/users/8/products', content_type='application/json', headers=headers)
 
         data=json.loads(response.text)
         self.assertTrue(response.status_code > 400)
@@ -72,9 +69,9 @@ class TestApp(unittest.TestCase):
 
         print(f"token: {self.token}")
 
-        headers = {"Autohrization": f"Bearer {TestApp.token}"}
+        headers = {"Authorization": f"Bearer {TestApp.token}"}
 
-        response = tester.ge('/api/v1/users/1/6', content_type='application/json', headers=headers)
+        response = tester.get('/api/v1/users/1/6', content_type='application/json', headers=headers)
 
         data=json.loads(response.text)
         self.assertTrue(response.status_code > 400)"""

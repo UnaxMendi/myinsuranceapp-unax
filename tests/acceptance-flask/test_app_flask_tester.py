@@ -55,19 +55,19 @@ class TestApp(unittest.TestCase):
         self.assertTrue(response.status_code > 400)
 
 
-    """def test_4_invalid_user(self):
+    def test_4_invalid_user(self):
         tester = app.test_client(self)
 
         print(f"token: {self.token}")
 
-        headers = {"Autohrization": f"Bearer {TestApp.token}"}
+        headers = {"Authorization": f"Bearer {TestApp.token}"}
 
-        response = tester.ge('/api/v1/users/8/1', content_type='application/json', headers=headers)
+        response = tester.ge('/api/v1/users/8/products', content_type='application/json', headers=headers)
 
         data=json.loads(response.text)
         self.assertTrue(response.status_code > 400)
 
-    def test_5_invalid_product(self):
+    """def test_5_invalid_product(self):
         tester = app.test_client(self)
 
         print(f"token: {self.token}")

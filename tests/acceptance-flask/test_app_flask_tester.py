@@ -79,7 +79,7 @@ class TestApp(unittest.TestCase):
         data=json.loads(response.text)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(len(data)>0)
-
+"""
     def test_5_product(self):
         tester = app.test_client(self)
 
@@ -91,7 +91,7 @@ class TestApp(unittest.TestCase):
         print(response)
         data=json.loads(response.text)
         print(data)
-        """
+        
         self.assertEqual(response.status_code, 200)
         self.assertTrue(len(data)>0)
 """

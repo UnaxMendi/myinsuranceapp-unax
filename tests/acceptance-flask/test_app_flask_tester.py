@@ -29,7 +29,7 @@ class TestApp(unittest.TestCase):
 
         print(f"token: {self.token}")
 
-        headers = {"Autohrization": f"Bearer {TestApp.token}"}
+        headers = {"Authorization": f"Bearer {TestApp.token}"}
 
         response = tester.get('/api/v1/users/1/products', content_type='application/json', headers=headers)
 

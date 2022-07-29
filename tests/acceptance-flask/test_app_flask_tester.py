@@ -64,6 +64,8 @@ class TestApp(unittest.TestCase):
         data=json.loads(response.text)
         """self.assertTrue(response.status_code > 400)"""
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(len(data)>0)
+
 
     """def test_5_invalid_product(self):
         tester = app.test_client(self)

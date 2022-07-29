@@ -74,9 +74,11 @@ class TestApp(unittest.TestCase):
 
         headers = {"Authorization": f"Bearer {TestApp.token}"}
 
-        response = tester.get('/api/v1/users/1/products/1', content_type='application/json', headers=headers)
+        response = tester.get('/api/v1/products/1', content_type='application/json', headers=headers)
         print(response)
-        """data=json.loads(response.text)
+        data=json.loads(response.text)
+        print(data)
+        """
         self.assertEqual(response.status_code, 200)
         self.assertTrue(len(data)>0)
 
